@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./Feedback.module.css";
 import FeedbackOptions from "./FeedbackOptions";
 import FeedbackStatistics from "./FeedbackStatistics";
@@ -29,12 +29,12 @@ const Feedback = () => {
             return Number(((value / total) * 100).toFixed(2));
         };
         
-        const addRate = (keyName) => {
+        const addRate = useCallback((keyName) => {
             setFeedback(prevFeedback => ({
                 ...prevFeedback,
                 [keyName]: prevFeedback[keyName] + 1
             }))
-        };
+        }, []);
 
     const total = countTotalFeedback();
     const goodPercentage = countPositiveFeedbackPercentage();
